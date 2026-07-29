@@ -17,27 +17,60 @@ logger = logging.getLogger(__name__)
 DEFAULT_DB_PATH = os.path.join(os.path.dirname(__file__), "database", "app.db")
 
 
-def get_db_connection(db_path: str = DEFAULT_DB_PATH) -> sqlite3.Connection:
+def resolve_db_path(db_path: Optional[str] = None) -> str:
+    """
+    Resolves a writable SQLite database path.
+    On serverless environments (e.g. Vercel), fallbacks to /tmp/app.db if root directory is read-only.
+    """
+    if not db_path or db_path == DEFAULT_DB_PATH:
+        db_path = os.getenv("DATABASE_URL", DEFAULT_DB_PATH)
+
+    if db_path.startswith("sqlite:///"):
+        db_path = db_path.replace("sqlite:///", "")
+
+    if os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME"):
+        return "/tmp/app.db"
+
+    db_dir = os.path.dirname(db_path)
+    if db_dir:
+        try:
+            os.makedirs(db_dir, exist_ok=True)
+        except (OSError, PermissionError):
+            return "/tmp/app.db"
+
+    return db_path
+
+
+def get_db_connection(db_path: Optional[str] = None) -> sqlite3.Connection:
     """
     Creates and returns a database connection with dictionary row formatting.
-    Ensure parent directories exist prior to connection.
+    Ensures safe fallback to /tmp/app.db on read-only serverless environments.
     """
-    db_dir = os.path.dirname(db_path)
+    target_path = resolve_db_path(db_path)
+    db_dir = os.path.dirname(target_path)
     if db_dir and not os.path.exists(db_dir):
-        os.makedirs(db_dir, exist_ok=True)
-        logger.info(f"Created database directory: {db_dir}")
+        try:
+            os.makedirs(db_dir, exist_ok=True)
+        except (OSError, PermissionError):
+            target_path = "/tmp/app.db"
 
-    conn = sqlite3.connect(db_path)
+    try:
+        conn = sqlite3.connect(target_path)
+    except sqlite3.OperationalError:
+        target_path = "/tmp/app.db"
+        conn = sqlite3.connect(target_path)
+
     conn.row_factory = sqlite3.Row
     return conn
 
 
-def init_db(db_path: str = DEFAULT_DB_PATH) -> None:
+def init_db(db_path: Optional[str] = None) -> None:
     """
     Initializes the SQLite database schema if the assessments table does not exist.
     """
+    target_path = resolve_db_path(db_path)
     try:
-        with get_db_connection(db_path) as conn:
+        with get_db_connection(target_path) as conn:
             cursor = conn.cursor()
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS assessments (
@@ -74,12 +107,13 @@ def save_assessment(
     input_data: Dict[str, Any],
     risk_result: Dict[str, Any],
     ai_result: Dict[str, Any],
-    db_path: str = DEFAULT_DB_PATH
+    db_path: Optional[str] = None
 ) -> int:
     """
     Saves a completed assessment submission, score, and AI recommendations to SQLite.
     Returns the newly inserted record ID.
     """
+    target_path = resolve_db_path(db_path)
     query = """
         INSERT INTO assessments (
             company_name, industry, employees, uses_mfa, firewall_enabled,
@@ -114,7 +148,7 @@ def save_assessment(
     )
 
     try:
-        with get_db_connection(db_path) as conn:
+        with get_db_connection(target_path) as conn:
             cursor = conn.cursor()
             cursor.execute(query, params)
             conn.commit()
@@ -126,10 +160,11 @@ def save_assessment(
         raise
 
 
-def get_all_assessments(limit: int = 20, db_path: str = DEFAULT_DB_PATH) -> List[Dict[str, Any]]:
+def get_all_assessments(limit: int = 20, db_path: Optional[str] = None) -> List[Dict[str, Any]]:
     """
     Retrieves recent assessment records sorted by timestamp descending.
     """
+    target_path = resolve_db_path(db_path)
     query = """
         SELECT id, company_name, industry, employees, risk_score, risk_level, 
                ai_explanation, recommendations, risk_breakdown, timestamp
@@ -138,7 +173,7 @@ def get_all_assessments(limit: int = 20, db_path: str = DEFAULT_DB_PATH) -> List
         LIMIT ?;
     """
     try:
-        with get_db_connection(db_path) as conn:
+        with get_db_connection(target_path) as conn:
             cursor = conn.cursor()
             cursor.execute(query, (limit,))
             rows = cursor.fetchall()
@@ -164,13 +199,14 @@ def get_all_assessments(limit: int = 20, db_path: str = DEFAULT_DB_PATH) -> List
         return []
 
 
-def get_assessment_by_id(assessment_id: int, db_path: str = DEFAULT_DB_PATH) -> Optional[Dict[str, Any]]:
+def get_assessment_by_id(assessment_id: int, db_path: Optional[str] = None) -> Optional[Dict[str, Any]]:
     """
     Retrieves a single assessment record by ID.
     """
+    target_path = resolve_db_path(db_path)
     query = "SELECT * FROM assessments WHERE id = ?;"
     try:
-        with get_db_connection(db_path) as conn:
+        with get_db_connection(target_path) as conn:
             cursor = conn.cursor()
             cursor.execute(query, (assessment_id,))
             row = cursor.fetchone()
@@ -192,3 +228,4 @@ def get_assessment_by_id(assessment_id: int, db_path: str = DEFAULT_DB_PATH) -> 
     except sqlite3.Error as e:
         logger.error(f"Error fetching assessment ID {assessment_id}: {e}")
         return None
+
