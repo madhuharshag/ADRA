@@ -41,23 +41,35 @@ app = Flask(
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "default_fallback_secret_key_2026")
 app.config["JSON_SORT_KEYS"] = False
 
-# Configure Flask-Limiter
-limiter = Limiter(
-    key_func=get_remote_address,
-    app=app,
-    default_limits=["100 per hour", "20 per minute"],
-    storage_uri="memory://"
-)
+# Configure Flask-Limiter safely for serverless runtime
+try:
+    limiter = Limiter(
+        key_func=get_remote_address,
+        app=app,
+        default_limits=["100 per hour", "20 per minute"],
+        storage_uri="memory://"
+    )
+except Exception as e:
+    logger.warning(f"Flask-Limiter initialization warning: {e}")
+    class DummyLimiter:
+        def limit(self, *args, **kwargs):
+            def decorator(f):
+                return f
+            return decorator
+    limiter = DummyLimiter()
 
-# Initialize Database Schema on startup
-db_path = os.getenv("DATABASE_URL", "sqlite:///database/app.db")
-if db_path.startswith("sqlite:///"):
-    db_path = db_path.replace("sqlite:///", "")
-
-db_service.init_db(db_path)
+# Initialize Database Schema safely on startup
+try:
+    db_path = os.getenv("DATABASE_URL", "sqlite:///database/app.db")
+    if db_path.startswith("sqlite:///"):
+        db_path = db_path.replace("sqlite:///", "")
+    db_service.init_db(db_path)
+except Exception as e:
+    logger.warning(f"Database schema initialization warning: {e}")
 
 # Register routes with Flask app and Limiter
 routes.register_routes(app, limiter)
+
 
 
 # Global Custom Error Handlers
