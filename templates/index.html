@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AegisCyber AI | Production Cybersecurity Risk Assessment</title>
+    <meta name="description" content="AI-powered cybersecurity risk evaluation dashboard for real-time vulnerability scoring, threat analysis, and actionable remediation guidelines.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Application Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Background Animated Cyber Grid -->
+    <div class="cyber-bg">
+        <div class="cyber-grid"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand-logo">
+                <i class="fa-solid fa-shield-halved brand-icon"></i>
+                <span class="brand-name">Aegis<span class="accent-text">Cyber AI</span></span>
+            </a>
+            
+            <nav class="nav-links">
+                <a href="#hero">Home</a>
+                <a href="#features">Features</a>
+                <a href="#assess">Assessment</a>
+                <a href="#dashboard" id="nav-dashboard-link">Dashboard</a>
+                <a href="#history">Audit History</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="#assess" class="btn btn-primary btn-sm">
+                    <i class="fa-solid fa-bolt"></i> Run Risk Audit
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="badge-pill">
+                        <i class="fa-solid fa-microchip"></i> Next-Gen AI Risk Intelligence Platform
+                    </div>
+                    <h1 class="hero-title">
+                        Real-Time <span class="gradient-text">AI Cybersecurity</span> Risk Analysis
+                    </h1>
+                    <p class="hero-subtitle">
+                        Evaluate your organization's threat vectors, benchmark defensive posture, and receive instant, prioritized remediation advice powered by expert AI advisory algorithms.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#assess" class="btn btn-primary btn-lg">
+                            <i class="fa-solid fa-shield-virus"></i> Start Assessment Now
+                        </a>
+                        <a href="#features" class="btn btn-secondary btn-lg">
+                            <i class="fa-solid fa-circle-info"></i> Explore Platform
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">0 - 100</span>
+                            <span class="stat-label">Precision Risk Metric</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">13 Vector</span>
+                            <span class="stat-label">Security Controls Engine</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">Instant</span>
+                            <span class="stat-label">AI Action Guidelines</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="cyber-card glass-panel hero-card">
+                        <div class="hero-card-header">
+                            <div class="window-controls">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <div class="window-title"><i class="fa-solid fa-terminal"></i> aegis-ai-sentinel --v3.4</div>
+                        </div>
+                        <div class="hero-card-body">
+                            <div class="radar-scan">
+                                <div class="sweep"></div>
+                                <div class="ping p1"></div>
+                                <div class="ping p2"></div>
+                                <div class="ping p3"></div>
+                                <div class="center-cross"></div>
+                            </div>
+                            <div class="terminal-status">
+                                <p><span class="term-green">[SYS_OK]</span> Defensive Telemetry Stream Active</p>
+                                <p><span class="term-blue">[AI_ENGINE]</span> Heuristic Rules Initialized</p>
+                                <p><span class="term-yellow">[AUDIT_READY]</span> Awaiting Organization Parameters...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Core Capabilities</span>
+                    <h2>Comprehensive Cybersecurity Protection</h2>
+                    <p class="section-desc">Designed for enterprise security officers, IT administrators, and security auditors.</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card glass-panel">
+                        <div class="feature-icon"><i class="fa-solid fa-calculator"></i></div>
+                        <h3>Deterministic Scoring</h3>
+                        <p>Evaluates 13 key infrastructure parameters including MFA, endpoint protection, and backup strategy to generate an objective 0–100 risk score.</p>
+                    </div>
+
+                    <div class="feature-card glass-panel">
+                        <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
+                        <h3>Modular AI Advisory</h3>
+                        <p>Uses intelligent threat advisory heuristics designed with clean adapter architecture for drop-in OpenAI API integration.</p>
+                    </div>
+
+                    <div class="feature-card glass-panel">
+                        <div class="feature-icon"><i class="fa-solid fa-database"></i></div>
+                        <h3>SQLite Audit Vault</h3>
+                        <p>Stores every evaluation securely with timestamps, risk breakdowns, and action plans for compliance tracking and historical audits.</p>
+                    </div>
+
+                    <div class="feature-card glass-panel">
+                        <div class="feature-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                        <h3>Interactive Visualizer</h3>
+                        <p>Displays risk scores on animated SVG dials, vulnerability breakdowns by severity, and prioritized remediation action cards.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assessment Form Section -->
+        <section id="assess" class="section section-dark">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Interactive Evaluation</span>
+                    <h2>Cybersecurity Risk Assessment Form</h2>
+                    <p class="section-desc">Fill out your organization's technical security posture parameters below.</p>
+                </div>
+
+                <div class="form-wrapper glass-panel">
+                    <form id="risk-assessment-form" novalidate>
+                        <!-- Form Section 1: Organizational Context -->
+                        <div class="form-group-header">
+                            <i class="fa-solid fa-building"></i> 1. Organization Information
+                        </div>
+                        <div class="form-grid">
+                            <div class="input-field">
+                                <label for="company_name">Company Name <span class="req">*</span></label>
+                                <input type="text" id="company_name" name="company_name" placeholder="e.g. Acme Cyber Dynamics" required>
+                                <small class="error-msg" id="err-company_name"></small>
+                            </div>
+
+                            <div class="input-field">
+                                <label for="industry">Industry Sector <span class="req">*</span></label>
+                                <select id="industry" name="industry" required>
+                                    <option value="" disabled selected>Select Industry Sector</option>
+                                    <option value="Technology & SaaS">Technology & SaaS</option>
+                                    <option value="Finance & Banking">Finance & Banking</option>
+                                    <option value="Healthcare & Life Sciences">Healthcare & Life Sciences</option>
+                                    <option value="E-Commerce & Retail">E-Commerce & Retail</option>
+                                    <option value="Manufacturing & Supply Chain">Manufacturing & Supply Chain</option>
+                                    <option value="Education & Public Sector">Education & Public Sector</option>
+                                    <option value="Energy & Utilities">Energy & Utilities</option>
+                                    <option value="Legal & Professional Services">Legal & Professional Services</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <small class="error-msg" id="err-industry"></small>
+                            </div>
+
+                            <div class="input-field">
+                                <label for="employees">Number of Employees <span class="req">*</span></label>
+                                <input type="number" id="employees" name="employees" min="1" max="1000000" placeholder="e.g. 150" required>
+                                <small class="error-msg" id="err-employees"></small>
+                            </div>
+                        </div>
+
+                        <!-- Form Section 2: Identity & Network Controls -->
+                        <div class="form-group-header">
+                            <i class="fa-solid fa-lock"></i> 2. Identity & Network Controls
+                        </div>
+                        <div class="form-grid">
+                            <div class="input-field">
+                                <label for="uses_mfa">Uses Multi-Factor Authentication (MFA)? <span class="req">*</span></label>
+                                <select id="uses_mfa" name="uses_mfa" required>
+                                    <option value="Yes">Yes (Enforced across all accounts)</option>
+                                    <option value="No" selected>No (Disabled or Partial)</option>
+                                </select>
+                            </div>
+
+                            <div class="input-field">
+                                <label for="firewall_enabled">Active Network Firewall Configured? <span class="req">*</span></label>
+                                <select id="firewall_enabled" name="firewall_enabled" required>
+                                    <option value="Yes">Yes (Next-Gen Firewall / Cloud SG)</option>
+                                    <option value="No" selected>No / Default Router Only</option>
+                                </select>
+                            </div>
+
+                            <div class="input-field">
+                                <label for="antivirus_installed">Endpoint Antivirus / EDR Deployed? <span class="req">*</span></label>
+                                <select id="antivirus_installed" name="antivirus_installed" required>
+                                    <option value="Yes">Yes (EDR / Central Managed Antivirus)</option>
+                                    <option value="No" selected>No (Unmanaged Workstations)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Form Section 3: Data Protection & Access Policies -->
+                        <div class="form-group-header">
+                            <i class="fa-solid fa-server"></i> 3. Data Resilience & Policies
+                        </div>
+                        <div class="form-grid">
+                            <div class="input-field">
+                                <label for="backup_strategy">Data Backup Strategy <span class="req">*</span></label>
+                                <select id="backup_strategy" name="backup_strategy" required>
+                                    <option value="Daily">Daily Automated & Offsite (3-2-1)</option>
+                                    <option value="Infrequent">Infrequent / Monthly Manual</option>
+                                    <option value="None" selected>None / No Formal Backup</option>
+                                </select>
+                            </div>
+
+                            <div class="input-field">
+                                <label for="password_policy">Password Policy Enforcement <span class="req">*</span></label>
+                                <select id="password_policy" name="password_policy" required>
+                                    <option value="Strong">Strong (16+ chars, Vault, MFA)</option>
+                                    <option value="Moderate">Moderate (8–12 chars)</option>
+                                    <option value="Weak" selected>Weak (Simple, No Enforced Length)</option>
+                                </select>
+                            </div>
+
+                            <div class="input-field">
+                                <label for="public_wifi_usage">Employees Connect to Public Wi-Fi? <span class="req">*</span></label>
+                                <select id="public_wifi_usage" name="public_wifi_usage" required>
+                                    <option value="Yes" selected>Yes (Allowed without forced VPN)</option>
+                                    <option value="No">No (Mandatory Corporate VPN)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Form Section 4: Human Factors & Cloud Ecosystem -->
+                        <div class="form-group-header">
+                            <i class="fa-solid fa-user-shield"></i> 4. Training, Cloud & Incident History
+                        </div>
+                        <div class="form-grid">
+                            <div class="input-field">
+                                <label for="employee_training">Employee Security Awareness Training <span class="req">*</span></label>
+                                <select id="employee_training" name="employee_training" required>
+                                    <option value="Yes">Yes (Regular Phishing Sims)</option>
+                                    <option value="No" selected>No Regular Training</option>
+                                </select>
+                            </div>
+
+                            <div class="input-field">
+                                <label for="cloud_provider">Primary Cloud Infrastructure <span class="req">*</span></label>
+                                <select id="cloud_provider" name="cloud_provider" required>
+                                    <option value="AWS">Amazon Web Services (AWS)</option>
+                                    <option value="Azure">Microsoft Azure</option>
+                                    <option value="GCP">Google Cloud Platform (GCP)</option>
+                                    <option value="Multi-cloud">Multi-Cloud / Hybrid</option>
+                                    <option value="On-Premise">On-Premise Servers</option>
+                                    <option value="None" selected>None / SaaS Only</option>
+                                </select>
+                            </div>
+
+                            <div class="input-field">
+                                <label for="email_security">Email Gateway Security <span class="req">*</span></label>
+                                <select id="email_security" name="email_security" required>
+                                    <option value="Advanced">Advanced (SPF, DKIM, DMARC, ATP)</option>
+                                    <option value="Basic">Basic (Standard Spam Filter)</option>
+                                    <option value="None" selected>None / Standard Webmail</option>
+                                </select>
+                            </div>
+
+                            <div class="input-field">
+                                <label for="previous_incidents">Security Incidents in Past Year <span class="req">*</span></label>
+                                <input type="number" id="previous_incidents" name="previous_incidents" min="0" max="100" value="0" required>
+                                <small class="error-msg" id="err-previous_incidents"></small>
+                            </div>
+                        </div>
+
+                        <!-- Form Error Alert Banner -->
+                        <div id="form-error-banner" class="alert alert-danger hidden">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <span id="form-error-text">Please correct errors in the form before submitting.</span>
+                        </div>
+
+                        <div class="form-submit-container">
+                            <button type="submit" id="submit-btn" class="btn btn-primary btn-xl">
+                                <span class="btn-text"><i class="fa-solid fa-magnifying-glass-chart"></i> Analyze Security Risk</span>
+                                <span class="btn-spinner hidden"><i class="fa-solid fa-spinner fa-spin"></i> Processing AI Telemetry...</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Visualization Section -->
+        <section id="dashboard" class="section hidden">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Audit Results</span>
+                    <h2 id="dash-company-name">Risk Assessment Dashboard</h2>
+                    <p class="section-desc" id="dash-timestamp">Generated Analysis Report</p>
+                </div>
+
+                <!-- Dashboard Summary Cards Grid -->
+                <div class="dashboard-grid">
+                    <!-- Gauge Dial Card -->
+                    <div class="dash-card glass-panel text-center">
+                        <h3>Cybersecurity Risk Score</h3>
+                        <div class="gauge-wrapper">
+                            <svg class="gauge-svg" viewBox="0 0 200 200">
+                                <circle class="gauge-bg" cx="100" cy="100" r="80"></circle>
+                                <circle id="gauge-fill" class="gauge-fill" cx="100" cy="100" r="80"></circle>
+                            </svg>
+                            <div class="gauge-center">
+                                <span id="gauge-score-value">0</span>
+                                <span class="gauge-max">/ 100</span>
+                            </div>
+                        </div>
+                        <div class="risk-level-container">
+                            <span class="risk-level-label">Threat Level:</span>
+                            <span id="risk-level-badge" class="badge-level level-low">Low</span>
+                        </div>
+                    </div>
+
+                    <!-- Executive AI Summary Card -->
+                    <div class="dash-card glass-panel dash-summary-card">
+                        <div class="card-title-bar">
+                            <i class="fa-solid fa-robot accent-icon"></i>
+                            <h3>AI Executive Security Analysis</h3>
+                        </div>
+                        <div class="ai-summary-content" id="ai-explanation-text">
+                            Submitting telemetry to AI Advisor...
+                        </div>
+                        <div class="summary-meta">
+                            <div class="meta-item"><i class="fa-solid fa-layer-group"></i> <span id="meta-industry">Technology</span></div>
+                            <div class="meta-item"><i class="fa-solid fa-users"></i> <span id="meta-employees">150 Staff</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Factors Breakdown Section -->
+                <div class="section-sub-header">
+                    <h3><i class="fa-solid fa-triangle-exclamation"></i> Detected Risk Factors</h3>
+                </div>
+                <div id="risk-breakdown-container" class="breakdown-grid">
+                    <!-- Dynamic breakdown cards inserted by script.js -->
+                </div>
+
+                <!-- AI Recommendations Section -->
+                <div class="section-sub-header">
+                    <h3><i class="fa-solid fa-list-check"></i> Prioritized Remediation Action Plan</h3>
+                </div>
+                <div id="recommendations-container" class="recommendations-list">
+                    <!-- Dynamic recommendation cards inserted by script.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Assessment History Section -->
+        <section id="history" class="section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Database Log</span>
+                    <h2>Audit History Archive</h2>
+                    <p class="section-desc">Historical records saved automatically to SQLite.</p>
+                </div>
+
+                <div class="table-wrapper glass-panel">
+                    <div class="table-actions">
+                        <button id="refresh-history-btn" class="btn btn-secondary btn-sm">
+                            <i class="fa-solid fa-rotate-right"></i> Refresh Log
+                        </button>
+                    </div>
+                    <div class="responsive-table">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Timestamp</th>
+                                    <th>Company</th>
+                                    <th>Industry</th>
+                                    <th>Employees</th>
+                                    <th>Risk Score</th>
+                                    <th>Risk Level</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-table-body">
+                                <tr>
+                                    <td colspan="8" class="text-center py-4">Loading audit logs...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section section-dark">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-content">
+                        <span class="section-tag">About AegisCyber AI</span>
+                        <h2>Enterprise Cybersecurity Framework</h2>
+                        <p>
+                            AegisCyber AI provides automated threat modeling based on NIST Cybersecurity Framework (CSF) 
+                            and ISO/IEC 27001 control domains.
+                        </p>
+                        <ul class="about-list">
+                            <li><i class="fa-solid fa-check-double text-cyan"></i> Zero-trust identity and credential verification algorithms.</li>
+                            <li><i class="fa-solid fa-check-double text-cyan"></i> Instant data resilience scoring to combat ransomware threats.</li>
+                            <li><i class="fa-solid fa-check-double text-cyan"></i> Modular Python Flask micro-architecture with SQLite storage.</li>
+                        </ul>
+                    </div>
+                    <div class="about-stats-card glass-panel">
+                        <div class="metric-box">
+                            <i class="fa-solid fa-shield"></i>
+                            <div class="metric-title">NIST CSF Aligned</div>
+                            <div class="metric-desc">Identify, Protect, Detect, Respond & Recover controls</div>
+                        </div>
+                        <div class="metric-box">
+                            <i class="fa-solid fa-lock"></i>
+                            <div class="metric-title">Rate Limited Endpoint</div>
+                            <div class="metric-desc">Flask-Limiter DDoS & brute-force defense</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">Get In Touch</span>
+                    <h2>Contact Cybersecurity Operations</h2>
+                    <p class="section-desc">Need a custom enterprise vulnerability assessment or dedicated support?</p>
+                </div>
+
+                <div class="contact-wrapper glass-panel">
+                    <form id="contact-form" onsubmit="event.preventDefault(); alert('Thank you for contacting AegisCyber Operations. We will get back to you shortly.');">
+                        <div class="form-grid">
+                            <div class="input-field">
+                                <label for="c_name">Your Name</label>
+                                <input type="text" id="c_name" required placeholder="John Doe">
+                            </div>
+                            <div class="input-field">
+                                <label for="c_email">Work Email</label>
+                                <input type="email" id="c_email" required placeholder="john@company.com">
+                            </div>
+                        </div>
+                        <div class="input-field">
+                            <label for="c_message">Message</label>
+                            <textarea id="c_message" rows="4" required placeholder="Describe your cybersecurity requirements..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa-solid fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <i class="fa-solid fa-shield-halved brand-icon"></i>
+                <span class="brand-name">Aegis<span class="accent-text">Cyber AI</span></span>
+                <p>Production Cybersecurity Risk Analysis Platform</p>
+            </div>
+            <div class="footer-copy">
+                &copy; 2026 AegisCyber AI. Built with Python, Flask, SQLite & Vanilla JS. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Assessment Details Modal -->
+    <div id="history-modal" class="modal hidden">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <h3 id="modal-title">Assessment Record Details</h3>
+                <button class="modal-close-btn" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
